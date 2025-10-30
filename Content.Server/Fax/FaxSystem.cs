@@ -126,7 +126,7 @@ public sealed class FaxSystem : EntitySystem
         // WL-Changes-start
         if (!CanPrintFromMaterial((uid, comp)))
         {
-            if (comp.IsNotifyOnEnptyEnabled && comp.PrintingQueue.Count != 0)
+            if (comp.IsNotifyOnEmptyEnabled && comp.PrintingQueue.Count != 0)
                 ProcessNoPaperNotify(uid, frameTime, comp);
 
             return;
@@ -160,7 +160,7 @@ public sealed class FaxSystem : EntitySystem
     // WL-Changes-start
     private void OnNotifyButtonPressed(EntityUid uid, FaxMachineComponent component, FaxSwitchNotifyMessage args)
     {
-        component.IsNotifyOnEnptyEnabled = !component.IsNotifyOnEnptyEnabled;
+        component.IsNotifyOnEmptyEnabled = !component.IsNotifyOnEmptyEnabled;
         UpdateUserInterface(uid, component);
     }
 
@@ -493,7 +493,7 @@ public sealed class FaxSystem : EntitySystem
             component.DestinationFaxAddress,
             /*WL-Changes-start*/
             component.IsMaterialStorageOpen,
-            component.IsNotifyOnEnptyEnabled,
+            component.IsNotifyOnEmptyEnabled,
             GetStoragePapersCount((uid, component))
             /*WL-Changes-end*/
             );
