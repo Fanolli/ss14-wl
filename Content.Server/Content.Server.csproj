@@ -28,5 +28,8 @@
     <ProjectReference Include="..\Content.Shared\Content.Shared.csproj" />
     <ProjectReference Include="..\Corvax\Content.Corvax.Interfaces.Server\Content.Corvax.Interfaces.Server.csproj" />
   </ItemGroup>
+  <ItemGroup>
+    <Folder Include="_WL\GameObjects\TypeCopyCreators\" />
+  </ItemGroup>
   <Import Project="..\RobustToolbox\MSBuild\Robust.Properties.targets" />
 </Project>

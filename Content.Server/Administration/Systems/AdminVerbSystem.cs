@@ -78,6 +78,9 @@ namespace Content.Server.Administration.Systems
         // WL-Changes-start
         [Dependency] private readonly LanguagesSystem _languages = default!; //WL-Changes: Languages
         [Dependency] private readonly EntityCopySystem _entityCopy = default!;
+        [Dependency] private readonly ILogManager _logManager = default!;
+
+        private ISawmill _sawmill = default!;
         // WL-Changes-end
 
         private readonly Dictionary<ICommonSession, List<EditSolutionsEui>> _openSolutionUis = new();
@@ -87,6 +90,10 @@ namespace Content.Server.Administration.Systems
             SubscribeLocalEvent<GetVerbsEvent<Verb>>(GetVerbs);
             SubscribeLocalEvent<RoundRestartCleanupEvent>(Reset);
             SubscribeLocalEvent<SolutionContainerManagerComponent, SolutionContainerChangedEvent>(OnSolutionChanged);
+
+            // WL-Changes-start
+            _sawmill = _logManager.GetSawmill("admin.verb");
+            // WL-Changes-end
         }
 
         private void GetVerbs(GetVerbsEvent<Verb> ev)
@@ -695,7 +702,14 @@ namespace Content.Server.Administration.Systems
                         if (!_entityCopy.CanCopyEntity(args.Target))
                             return;
 
-                        _entityCopy.TryCopyEntity(args.Target, Transform(args.Target).Coordinates, out _);
+                        try
+                        {
+                            _entityCopy.TryCopyEntity(args.Target, Transform(args.Target).Coordinates, out _);
+                        }
+                        catch (Exception ex)
+                        {
+                            _sawmill.Error(ex.ToStringBetter());
+                        }
                     },
                     IconEntity = GetNetEntity(args.Target),
                     Impact = LogImpact.Medium,

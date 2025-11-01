@@ -190,7 +190,7 @@ public sealed partial class DungeonSystem
             // WL-Changes-start
             //var protoId = _metaQuery.GetComponent(templateEnt).EntityPrototype?.ID;
 
-            _entityCopy.CopyEntity(templateEnt, new EntityCoordinates(gridUid, childPos), childRot);
+            _entityCopy.CopyEntity(templateEnt, new EntityCoordinates(gridUid, childPos), rotation: childRot);
 
             //var ent = Spawn(protoId, new EntityCoordinates(gridUid, childPos));
 
