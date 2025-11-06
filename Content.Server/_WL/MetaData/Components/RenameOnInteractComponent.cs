@@ -1,3 +1,5 @@
+using Content.Shared.Charges.Components;
+
 namespace Content.Server._WL.MetaData.Components;
 
 /// <summary>
@@ -7,7 +9,7 @@ namespace Content.Server._WL.MetaData.Components;
 public sealed partial class RenameOnInteractComponent : Component
 {
     /// <summary>
-    /// Whether renaming this entity requires charges (e.g., from LimitedChargesComponent).
+    /// Whether renaming this entity requires charges (from <see cref="LimitedChargesComponent"/>).
     /// </summary>
     [DataField]
     public bool NeedCharges { get; set; } = true;
