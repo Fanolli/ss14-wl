@@ -79,18 +79,12 @@ public sealed partial class StationaryComputerWindow : FancyWindow
 
     public void UnlockConsole()
     {
-        if (!_hasPendingCommand)
-            return;
-
         _hasPendingCommand = false;
         SetInputEnabled(true);
     }
 
     public void LockConsole()
     {
-        if (!_hasPendingCommand)
-            return;
-
         _hasPendingCommand = true;
         SetInputEnabled(false);
     }
