@@ -665,32 +665,18 @@
       - !type:Vomit
         probability: 0.1
         conditions:
-          - !type:MetabolizerTypeCondition
-            type: Animal
-            inverted: true
 # WL species start
-          # Golem
           - !type:MetabolizerTypeCondition
-            type: [ Golem ]
+            type: [ Animal, Vox, Golem ]
             inverted: true
 # WL species end
-          - !type:MetabolizerTypeCondition
-            type: [ Animal, Vox ]
-            inverted: true
       - !type:HealthChange
         conditions:
-        - !type:MetabolizerTypeCondition
-          type: [ Animal, Vox ]
-          inverted: true
 # WL species start
-        # Golem
         - !type:MetabolizerTypeCondition
-          type: [ Golem ]
+          type: [ Animal, Vox, Golem ]
           inverted: true
 # WL species end
-        - !type:MetabolizerTypeCondition
-          type: Vox
-          inverted: true
         damage:
           types:
             Poison: 1
@@ -725,17 +711,10 @@
           reagent: Allicin
           min: 1
 # WL species start
-        # Cischi
         - !type:MetabolizerTypeCondition
-          type: Cischi
-          inverted: true
-        # Golem
-        - !type:MetabolizerTypeCondition
-          type: [ Golem ]
+          type: [ Animal, Cischi, Golem ]
           inverted: true
 # WL species end
-        - !type:MetabolizerTypeCondition
-          type: [Animal]
         damage:
           types:
             Poison: 0.06
