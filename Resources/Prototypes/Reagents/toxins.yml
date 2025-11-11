@@ -80,7 +80,7 @@
         conditions:
         # Golem
         - !type:MetabolizerTypeCondition
-          type: [ Golem, Anumal ]
+          type: [ Golem, Animal ]
           inverted: true
 # WL species end
 
