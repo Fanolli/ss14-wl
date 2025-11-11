@@ -58,21 +58,30 @@ public sealed class EntitySpokeEvent : EntityEventArgs
 {
     public readonly EntityUid Source;
     public readonly string Message;
+    public readonly string OriginalMessage;
     public readonly string? ObfuscatedMessage; // not null if this was a whisper
-    public readonly string OriginalMessage; // Corvax-TTS
+
+    //WL-Changes: Languages start
+    public readonly string? LangMessage;
+    public readonly string? LangObfusMessage;
+    //WL-Changes: Languages end
 
     /// <summary>
-    /// If the entity was trying to speak into a radio, this was the channel they were trying to access. If a radio
-    /// message gets sent on this channel, this should be set to null to prevent duplicate messages.
+    ///     If the entity was trying to speak into a radio, this was the channel they were trying to access. If a radio
+    ///     message gets sent on this channel, this should be set to null to prevent duplicate messages.
     /// </summary>
     public RadioChannelPrototype? Channel;
 
-    public EntitySpokeEvent(EntityUid source, string message, string originalMessage, RadioChannelPrototype? channel, string? obfuscatedMessage)// Corvax-TTS originalMessage
+    public EntitySpokeEvent(EntityUid source, string message, string originalMessage, RadioChannelPrototype? channel, string? obfuscatedMessage, /*WL-Changes: Languages*/string? langMessage, string? langObfusMessage/*WL-Changes: Languages*/)
     {
         Source = source;
         Message = message;
         OriginalMessage = originalMessage; // Corvax-TTS: Spec symbol sanitize
         Channel = channel;
         ObfuscatedMessage = obfuscatedMessage;
+        //WL-Changes: Languages start
+        LangMessage = langMessage;
+        LangObfusMessage = langObfusMessage;
+        //WL-Changes: Languages end
     }
 }
