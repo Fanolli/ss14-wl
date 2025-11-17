@@ -1,5 +1,6 @@
 using Robust.Shared.Serialization;
 using Robust.Shared.Audio;
+using Robust.Shared.Utility;
 
 namespace Content.Shared.Paper;
 
@@ -12,16 +13,19 @@ namespace Content.Shared.Paper;
 [DataDefinition, Serializable, NetSerializable]
 public partial struct StampDisplayInfo
 {
-    StampDisplayInfo(string s)
-    {
-        StampedName = s;
-    }
-
-    [DataField("stampedName")]
+    [DataField]
     public string StampedName;
 
-    [DataField("stampedColor")]
+    [DataField]
     public Color StampedColor;
+
+    // WL-Changes-start
+    [DataField]
+    public SpriteSpecifier StampedTexture;
+
+    [DataField]
+    public bool StampedTextureIsBorder;
+    // WL-Changes-end
 };
 
 [RegisterComponent]
@@ -50,4 +54,12 @@ public sealed partial class StampComponent : Component
     /// </summary>
     [DataField("sound")]
     public SoundSpecifier? Sound = null;
+
+    // WL-Changes-start
+    [DataField]
+    public SpriteSpecifier StampTexture = new SpriteSpecifier.Texture(new ResPath("/Textures/Interface/Paper/paper_stamp_border.svg.96dpi.png"));
+
+    [DataField]
+    public bool IsBorderTexture = true;
+    // WL-Changes-end
 }

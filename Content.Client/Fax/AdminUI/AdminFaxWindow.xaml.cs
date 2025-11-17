@@ -14,7 +14,18 @@ public sealed partial class AdminFaxWindow : DefaultWindow
 {
     private const string StampsRsiPath = "/Textures/Objects/Misc/bureaucracy.rsi";
 
-    public Action<(NetEntity entity, string title, string stampedBy, string message, string stampSprite, Color stampColor, bool locked)>? OnMessageSend;
+    public Action<(
+            NetEntity entity,
+            string title,
+            string stampedBy,
+            string message,
+            string stampSprite,
+            Color stampColor,
+            bool locked,
+            SpriteSpecifier.Texture texture, // WL-Changes
+            bool isTextureBorder // WL-Changes
+        )>? OnMessageSend;
+
     public Action<NetEntity>? OnFollowFax;
 
     [Dependency] private readonly IResourceCache _resCache = default!;
@@ -99,6 +110,16 @@ public sealed partial class AdminFaxWindow : DefaultWindow
         var from = FromEdit.Text;
         var stampColor = StampColorSelector.Color;
         var locked = LockPageCheckbox.Pressed;
-        OnMessageSend?.Invoke((faxEntity.Value, title, from, message, stamp, stampColor, locked));
+
+        // WL-Changes-start
+        var texturePath = string.IsNullOrWhiteSpace(TexturePath.Text)
+            ? "/Textures/Interface/Paper/paper_stamp_border.svg.96dpi.png"
+            : TexturePath.Text;
+
+        var texture = new SpriteSpecifier.Texture(new ResPath(texturePath));
+        var isTextureBorder = IsTextureIsBorderCheckbox.Pressed;
+
+        OnMessageSend?.Invoke((faxEntity.Value, title, from, message, stamp, stampColor, locked, texture, isTextureBorder));
+        // WL-Changes-end
     }
 }
