@@ -11,7 +11,7 @@
   requirements:
     - !type:DepartmentTimeRequirement
       department: Cargo
-      time: 10800 # 3 hrs
+      time: 3h
 #    - !type:OverallPlaytimeRequirement
 #      time: 36000 #10 hrs
     - !type:AgeRequirement

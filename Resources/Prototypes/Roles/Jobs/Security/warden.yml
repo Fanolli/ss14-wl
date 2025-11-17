@@ -8,7 +8,7 @@
   requirements:
     - !type:DepartmentTimeRequirement
       department: Security
-      time: 108000 #50 hrs # Corvax-RoleTime
+      time: 50h # Corvax-RoleTime
     - !type:AgeRequirement
       minAge: 24 # WL-Changes-AgeRequirement
     - !type:TraitsRequirement #Corvax-TraitsRequirement
@@ -29,6 +29,8 @@
   - External
   - Detective
   - Cryogenics
+  - GenpopEnter
+  - GenpopLeave
   special:
   - !type:AddImplantSpecial
     implants: [ MindShieldImplant ]

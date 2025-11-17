@@ -9,7 +9,7 @@
   requirements:
     - !type:DepartmentTimeRequirement
       department: Medical
-      time: 18000 #5 hrs # Corvax-RoleTime
+      time: 5h
     - !type:AgeRequirement
       minAge: 24
   startingGear: ChemistGear
