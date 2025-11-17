@@ -19,8 +19,3 @@
     board: StationaryComputerCircuitboard
   - type: ApcPowerReceiver
     powerLoad: 400
-  - type: PhysicalComposition
-    materialComposition:
-      Steel: 50
-      Glass: 40
-      Plastic: 70
