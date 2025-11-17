@@ -61,7 +61,7 @@ public static class AdminFaxEuiMsg
 
         // WL-Changes-start
         public SpriteSpecifier.Texture Texture { get; }
-        public bool IsTextureBolder { get; }
+        public bool IsTextureBorder { get; }
         // WL-Changes-end
 
         public Send(
@@ -86,7 +86,7 @@ public static class AdminFaxEuiMsg
 
             // WL-Changes-start
             Texture = texture;
-            IsTextureBolder = isTextureBorder;
+            IsTextureBorder = isTextureBorder;
             // WL-Changes-end
         }
     }

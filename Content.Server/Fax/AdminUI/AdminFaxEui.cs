@@ -71,7 +71,7 @@ public sealed class AdminFaxEui : BaseEui
                                     StampedColor = sendData.StampColor,
                                     // WL-Changes-start
                                     StampedTexture = sendData.Texture,
-                                    StampedTextureIsBorder = sendData.IsTextureBolder
+                                    StampedTextureIsBorder = sendData.IsTextureBorder
                                     // WL-Changes-end
                                 }
                             },
