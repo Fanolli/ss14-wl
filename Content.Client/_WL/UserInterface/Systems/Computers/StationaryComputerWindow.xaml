@@ -19,9 +19,9 @@
                         <BoxContainer Orientation="Vertical" Name="MainBoxContainer">
                             
                         </BoxContainer>
-                        <BoxContainer HorizontalExpand="True" Margin="4">
+                        <BoxContainer HorizontalExpand="True" Margin="4 0 4 4">
                             <Label Name="DiscPathLabel" HorizontalAlignment="Left"/>
-                            <this:CmdLineEdit Name="InputLine" Access="Public" HorizontalAlignment="Left" Margin="8 0 0 0"/>
+                            <this:CmdLineEdit Name="InputLine" Access="Public" HorizontalAlignment="Left" Margin="9 0 0 0"/>
                             <this:BlinkingCaret Name="Caret" HorizontalAlignment="Left" VerticalAlignment="Bottom"/>
                         </BoxContainer>
                     </BoxContainer>

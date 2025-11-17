@@ -7,8 +7,6 @@ using Robust.Shared.Utility;
 using Robust.Client.Graphics;
 using Robust.Client.UserInterface;
 using Robust.Shared.Input;
-using Robust.Client.Input;
-using Content.Shared._WL.StationaryComputer;
 using Robust.Client.ResourceManagement;
 using Robust.Shared.Prototypes;
 using Robust.Client.UserInterface.RichText;
@@ -62,7 +60,7 @@ public sealed partial class StationaryComputerWindow : FancyWindow
 
             OnCommandEntered?.Invoke(entry);
 
-            LockConsole();
+            LockLineEdit();
         };
 
         var fontProto = _protoMan.Index(FontPrototypeId);
@@ -77,20 +75,14 @@ public sealed partial class StationaryComputerWindow : FancyWindow
         InputLine.SetInputEnabled(value);
     }
 
-    public void UnlockConsole()
+    public void UnlockLineEdit()
     {
-        if (!_hasPendingCommand)
-            return;
-
         _hasPendingCommand = false;
         SetInputEnabled(true);
     }
 
-    public void LockConsole()
+    public void LockLineEdit()
     {
-        if (!_hasPendingCommand)
-            return;
-
         _hasPendingCommand = true;
         SetInputEnabled(false);
     }

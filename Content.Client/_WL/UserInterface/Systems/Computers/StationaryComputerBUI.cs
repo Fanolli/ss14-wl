@@ -45,7 +45,6 @@ public sealed class StationaryComputerBUI : BoundUserInterface
             return;
 
         Populate((Owner, comp));
-
         _window?.InputLine.SetText(string.Empty, true);
     }
 
@@ -84,6 +83,6 @@ public sealed class StationaryComputerBUI : BoundUserInterface
             _window.AddOutputLine(loc.Root, loc.Content);
         }
 
-        _window.UnlockConsole();
+        _window.UnlockLineEdit();
     }
 }

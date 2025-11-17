@@ -1,6 +1,5 @@
 using Robust.Shared.GameStates;
 using Robust.Shared.Serialization;
-using SixLabors.ImageSharp.Formats.Webp;
 
 namespace Content.Shared._WL.StationaryComputer;
 
@@ -21,6 +20,12 @@ public sealed partial class StationaryComputerComponent : Component
 
     [DataField, AutoNetworkedField]
     public Color ConsoleColor { get; set; } = Color.White;
+
+    [DataField, AutoNetworkedField]
+    public bool Locked { get; set; } = false;
+
+    [DataField, AutoNetworkedField]
+    public string? Password { get; set; }
 
     public void AddContent(string? content, string? root = null)
     {
