@@ -17,14 +17,15 @@ public sealed class SuckableFoodTest
 
         var server = pair.Server;
 
-        var protoManager = server.ResolveDependency<IPrototypeManager>();
+        var protoManager = server.ProtoMan;
         var componentFactory = server.ResolveDependency<IComponentFactory>();
 
         Assert.Multiple(() =>
         {
             foreach (var proto in protoManager.EnumeratePrototypes<EntityPrototype>())
             {
-                if (!proto.TryGetComponent<SuckableFoodComponent>(out var suckableComp, componentFactory))
+                var compName = componentFactory.GetComponentName<SuckableFoodComponent>();
+                if (!proto.Components.TryGetValue(compName, out var suckableCompUncasted) || suckableCompUncasted.Component is not SuckableFoodComponent suckableComp)
                     continue;
 
                 if (suckableComp.EquippedEntityOnDissolve == null)
