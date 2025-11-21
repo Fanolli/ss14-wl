@@ -8,6 +8,7 @@ using Content.Shared.Chemistry;
 using Content.Shared.Chemistry.Components.SolutionManager;
 using Content.Shared.Chemistry.EntitySystems;
 using Content.Shared.FixedPoint;
+using Content.Shared.IdentityManagement;
 using Content.Shared.Inventory;
 using Content.Shared.Inventory.Events;
 using Content.Shared.Mobs.Systems;
@@ -132,7 +133,7 @@ public sealed partial class SuckableFoodSystem : EntitySystem
         {
             _inventory.TryUnequip(ev.Sucker, ev.Container.ID, true, true);
 
-            var msg = Loc.GetString("food-sweets-got-dissolved-popup-message", ("entity", Name(food)));
+            var msg = Loc.GetString("food-sweets-got-dissolved-popup-message", ("entity", Identity.Name(food, EntityManager)));
             _popup.PopupEntity(msg, ev.Sucker, Filter.Entities(ev.Sucker), true, Shared.Popups.PopupType.Medium);
 
             TryQueueDel(food);
