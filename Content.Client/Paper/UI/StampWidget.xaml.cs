@@ -15,20 +15,38 @@ public sealed partial class StampWidget : PanelContainer
 {
     private static readonly ProtoId<ShaderPrototype> PaperStamp = "PaperStamp";
 
-    private readonly StyleBoxTexture _borderTexture;
+    // WL-Changes-start
+    //private readonly StyleBoxTexture _borderTexture;
+    // WL-Changes-end
+
     private readonly ShaderInstance? _stampShader;
 
     // WL-Changes-start
     private readonly SpriteSystem _sprite;
-    // WL-Changes-end
 
+    private StyleBoxTexture? _borderTexture;
+    private TextureRect? _backgroundOverrideTexture;
+    private StampLabel? _stampLabel;
+
+    private float _orientation = 1.0f;
     public float Orientation
     {
-        get => StampedByLabel.Orientation;
-        set => StampedByLabel.Orientation = value;
+        get
+        {
+            if (_stampLabel != null)
+                return _stampLabel.Orientation;
+
+            return _orientation;
+        }
+        set
+        {
+            if (_stampLabel != null)
+                _stampLabel.Orientation = value;
+
+            _orientation = value;
+        }
     }
 
-    // WL-Changes-start
     //public StampDisplayInfo StampInfo
     //{
     //    set
@@ -48,11 +66,9 @@ public sealed partial class StampWidget : PanelContainer
         // WL-Changes-start
         _sprite = IoCManager.Resolve<IEntityManager>().System<SpriteSystem>();
 
-        _borderTexture = new StyleBoxTexture();
+        //_borderTexture.SetPatchMargin(StyleBoxTexture.Margin.All, 7.0f);
+        //PanelOverride = _borderTexture;
         // WL-Changes-end
-
-        _borderTexture.SetPatchMargin(StyleBoxTexture.Margin.All, 7.0f);
-        PanelOverride = _borderTexture;
 
         var prototypes = IoCManager.Resolve<IPrototypeManager>();
         _stampShader = prototypes.Index(PaperStamp).InstanceUnique();
@@ -61,15 +77,51 @@ public sealed partial class StampWidget : PanelContainer
     // WL-Changes-start
     public void UpdateVisuals(StampDisplayInfo stampInfo)
     {
+        RemoveAllChildren();
+
+        ModulateSelfOverride = null;
+        PanelOverride = null;
+
+        _borderTexture = null;
+        _backgroundOverrideTexture = null;
+        _stampLabel = null;
+
         var texture = _sprite.Frame0(stampInfo.StampedTexture);
+        var textureScale = stampInfo.OverrideTextureSize ?? Vector2.One;
 
-        _borderTexture.Texture = texture;
+        if (stampInfo.StampedTextureIsBorder)
+        {
+            _stampLabel = new StampLabel()
+            {
+                Margin = new(12, 6),
+                Text = Loc.GetString(stampInfo.StampedName),
+                FontColorOverride = stampInfo.StampedColor
+            };
+            _stampLabel.StyleClasses.Add("LabelHeadingBigger");
 
-        ModulateSelfOverride = stampInfo.StampedColor;
+            _borderTexture = new StyleBoxTexture()
+            {
+                Texture = texture,
+                TextureScale = textureScale,
+            };
+            _borderTexture.SetPatchMargin(StyleBoxTexture.Margin.All, 7.0f);
 
-        StampedByLabel.Visible = stampInfo.StampedTextureIsBorder;
-        StampedByLabel.Text = Loc.GetString(stampInfo.StampedName);
-        StampedByLabel.FontColorOverride = stampInfo.StampedColor;
+            ModulateSelfOverride = stampInfo.StampedColor;
+            PanelOverride = _borderTexture;
+
+            AddChild(_stampLabel);
+        }
+        else
+        {
+            _backgroundOverrideTexture = new TextureRect
+            {
+                Texture = texture,
+                TextureScale = textureScale,
+                Stretch = TextureRect.StretchMode.Scale
+            };
+
+            AddChild(_backgroundOverrideTexture);
+        }
     }
     // WL-Changes-end
 

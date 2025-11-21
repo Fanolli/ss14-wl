@@ -1,6 +1,7 @@
 using Robust.Shared.Serialization;
 using Robust.Shared.Audio;
 using Robust.Shared.Utility;
+using System.Numerics;
 
 namespace Content.Shared.Paper;
 
@@ -25,6 +26,9 @@ public partial struct StampDisplayInfo
 
     [DataField]
     public bool StampedTextureIsBorder = true;
+
+    [DataField]
+    public Vector2? OverrideTextureSize = null;
     // WL-Changes-end
 };
 
@@ -61,5 +65,8 @@ public sealed partial class StampComponent : Component
 
     [DataField]
     public bool IsBorderTexture = true;
+
+    [DataField]
+    public Vector2? OverrideTextureSize = null;
     // WL-Changes-end
 }

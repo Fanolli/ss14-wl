@@ -1,6 +1,7 @@
 using Content.Shared.Eui;
 using Robust.Shared.Serialization;
 using Robust.Shared.Utility;
+using System.Numerics;
 
 namespace Content.Shared.Fax;
 
@@ -62,6 +63,7 @@ public static class AdminFaxEuiMsg
         // WL-Changes-start
         public SpriteSpecifier.Texture Texture { get; }
         public bool IsTextureBorder { get; }
+        public Vector2 Size { get; }
         // WL-Changes-end
 
         public Send(
@@ -73,7 +75,8 @@ public static class AdminFaxEuiMsg
             Color stampColor,
             bool locked,
             SpriteSpecifier.Texture texture, // WL-Changes-start
-            bool isTextureBorder // WL-Changes-end
+            bool isTextureBorder, // WL-Changes-end
+            Vector2 size // WL-Changes-end
             )
         {
             Target = target;
@@ -87,6 +90,7 @@ public static class AdminFaxEuiMsg
             // WL-Changes-start
             Texture = texture;
             IsTextureBorder = isTextureBorder;
+            Size = size;
             // WL-Changes-end
         }
     }

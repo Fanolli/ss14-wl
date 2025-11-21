@@ -6,6 +6,7 @@ using Robust.Client.UserInterface.CustomControls;
 using Robust.Client.UserInterface.XAML;
 using Robust.Shared.ContentPack;
 using Robust.Shared.Utility;
+using System.Numerics;
 
 namespace Content.Client.Fax.AdminUI;
 
@@ -23,7 +24,8 @@ public sealed partial class AdminFaxWindow : DefaultWindow
             Color stampColor,
             bool locked,
             SpriteSpecifier.Texture texture, // WL-Changes
-            bool isTextureBorder // WL-Changes
+            bool isTextureBorder, // WL-Changes
+            Vector2 size // WL-Changes
         )>? OnMessageSend;
 
     public Action<NetEntity>? OnFollowFax;
@@ -119,7 +121,11 @@ public sealed partial class AdminFaxWindow : DefaultWindow
         var texture = new SpriteSpecifier.Texture(new ResPath(texturePath));
         var isTextureBorder = IsTextureIsBorderCheckbox.Pressed;
 
-        OnMessageSend?.Invoke((faxEntity.Value, title, from, message, stamp, stampColor, locked, texture, isTextureBorder));
+        var size = new Vector2(1, 1);
+        if (float.TryParse(XSizeLineEdit.Text, out var xsize) && float.TryParse(YSizeLineEdit.Text, out var ysize))
+            size = new(xsize, ysize);
+
+        OnMessageSend?.Invoke((faxEntity.Value, title, from, message, stamp, stampColor, locked, texture, isTextureBorder, size));
         // WL-Changes-end
     }
 }

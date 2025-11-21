@@ -24,7 +24,8 @@ public sealed class AdminFaxEui : BaseEui
             args.stampColor,
             args.locked,
             args.texture, // WL-Changes
-            args.isTextureBorder // WL-Changes
+            args.isTextureBorder, // WL-Changes
+            args.size // WL-Changes
             ));
     }
 
