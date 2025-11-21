@@ -60,9 +60,15 @@ public sealed partial class StampComponent : Component
     public SoundSpecifier? Sound = null;
 
     // WL-Changes-start
+    /// <summary>
+    /// The texture to use when rendering this stamp on paper.
+    /// </summary>
     [DataField]
     public SpriteSpecifier StampTexture = new SpriteSpecifier.Texture(new ResPath("/Textures/Interface/Paper/paper_stamp_border.svg.96dpi.png"));
 
+    /// <summary>
+    /// Whether the stamp texture should be used as a border around text, or contains the text itself
+    /// </summary>
     [DataField]
     public bool IsBorderTexture = true;
 

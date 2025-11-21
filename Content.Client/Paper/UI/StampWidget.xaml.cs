@@ -15,10 +15,6 @@ public sealed partial class StampWidget : PanelContainer
 {
     private static readonly ProtoId<ShaderPrototype> PaperStamp = "PaperStamp";
 
-    // WL-Changes-start
-    //private readonly StyleBoxTexture _borderTexture;
-    // WL-Changes-end
-
     private readonly ShaderInstance? _stampShader;
 
     // WL-Changes-start
@@ -47,27 +43,12 @@ public sealed partial class StampWidget : PanelContainer
         }
     }
 
-    //public StampDisplayInfo StampInfo
-    //{
-    //    set
-    //    {
-
-    //        StampedByLabel.Text = Loc.GetString(value.StampedName);
-    //        StampedByLabel.FontColorOverride = value.StampedColor;
-    //        ModulateSelfOverride = value.StampedColor;
-    //    }
-    //}
-    // WL-Changes-end
-
     public StampWidget()
     {
         RobustXamlLoader.Load(this);
 
         // WL-Changes-start
         _sprite = IoCManager.Resolve<IEntityManager>().System<SpriteSystem>();
-
-        //_borderTexture.SetPatchMargin(StyleBoxTexture.Margin.All, 7.0f);
-        //PanelOverride = _borderTexture;
         // WL-Changes-end
 
         var prototypes = IoCManager.Resolve<IPrototypeManager>();

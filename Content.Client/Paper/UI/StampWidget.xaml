@@ -3,7 +3,5 @@
                    xmlns:paper="clr-namespace:Content.Client.Paper.UI"
                    HorizontalAlignment="Center"
                    Margin="6">
-    <!-- WL-Changes-start -->
-    
-    <!-- WL-Changes-end -->
+    <!-- WL-Changes -->
 </paper:StampWidget>
