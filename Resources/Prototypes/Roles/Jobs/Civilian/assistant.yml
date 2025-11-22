@@ -18,7 +18,7 @@
   supervisors: job-supervisors-everyone
 #  access: # WL-Changes
 #  - Maintenance
-  bonusSkillPoints: 16 # WL-Skills / Why?
+  bonusSkillPoints: 16 # WL-Skills / Why? / bcs если какой-то там пассажир смог попасть на станцию, то наверное в каких-то навыках он и выдается и так как подвязать конкретные навыки ему низя, то остается дать ему бОльшую вариативность в собственном выборе навыков :3
 
 - type: startingGear
   id: PassengerGear

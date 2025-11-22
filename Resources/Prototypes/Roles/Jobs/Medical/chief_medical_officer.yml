@@ -1,4 +1,4 @@
-# Best job.
+# Not(tm) Best job.
 
 - type: job
   id: ChiefMedicalOfficer
@@ -45,8 +45,7 @@
   # WL-Skills-start
   bonusSkillPoints: 6
   defaultSkills:
-    Bureaucracy: 3
-    Eva: 3
+    Bureaucracy: 2
     Anatomy: 3
     Chemistry: 2
     Medicine: 3
