@@ -99,11 +99,11 @@ public sealed partial class JukeboxSystem : SharedJukeboxSystem
 
         if (!_protoManager.TryIndex(component.SelectedSongId, out var proto))
         {
-            args.PushMarkup(Loc.GetString("jukebox-examined-song-not-playing"));
+            args.PushMarkup(Loc.GetString("jukebox-examined-song-not-playing"), 1);
             return;
         }
 
-        args.PushMarkup(Loc.GetString("jukebox-examined-song-playing", ("song", GetSongRepresentation(proto))));
+        args.PushMarkup(Loc.GetString("jukebox-examined-song-playing", ("song", GetSongRepresentation(proto))), 1);
     }
     // WL-Changes-end
 
