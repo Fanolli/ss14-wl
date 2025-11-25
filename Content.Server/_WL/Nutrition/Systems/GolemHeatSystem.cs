@@ -8,7 +8,7 @@ using Content.Shared.Movement.Systems;
 using Content.Shared.Nutrition.Components;
 using JetBrains.Annotations;
 
-namespace Content.Server._WL.Nutrition.EntitySystems;
+namespace Content.Server._WL.Nutrition.Systems;
 
 [UsedImplicitly]
 public sealed class GolemHeatSystem : EntitySystem
