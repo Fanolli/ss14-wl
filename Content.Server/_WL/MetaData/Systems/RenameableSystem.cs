@@ -26,6 +26,7 @@ public sealed partial class RenameableSystem : EntitySystem
 
     private static readonly ResPath VerbTexturePath = new("/Textures/Interface/AdminActions/rename.png");
 
+    // TODO: вынести в поле в компоненте
     private const int NewNameMaxLength = 40;
 
     public override void Initialize()
@@ -73,9 +74,10 @@ public sealed partial class RenameableSystem : EntitySystem
         return true;
     }
 
+    // TODO: тоже заполнить компонент уточняющими свойствами. деспэйр
     public string FormatNewName(string str)
     {
-        return str.ToLower();
+        return str;
     }
 
     public bool TryOpenDialog(ICommonSession session, Entity<RenameOnInteractComponent?> item)

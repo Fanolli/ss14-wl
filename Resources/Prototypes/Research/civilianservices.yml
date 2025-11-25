@@ -68,8 +68,13 @@
     - DawInstrumentMachineCircuitboard
     - MassMediaCircuitboard
     - JukeboxCircuitBoard
-    - PhotoCameraRecipe #WL-Changes-Photo
-    - StationaryComputerCircuitboardRecipe # WL-Changes
+    # WL-Changes-start
+    - PhotoCameraRecipe
+    - StationaryComputerCircuitboardRecipe
+    - BassGuitarInstrumentRecipe
+    - ElectricGuitarInstrumentRecipe
+    - MicrophoneInstrumentRecipe
+    # WL-Changes-end
 
 - type: technology
   id: MeatManipulation
