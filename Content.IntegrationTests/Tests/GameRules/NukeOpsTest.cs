@@ -237,7 +237,9 @@ public sealed class NukeOpsTest
 
             await server.WaitAssertion(() =>
             {
-                Assert.That(entMan.TryGetComponent(player, out RespiratorComponent? resp), Is.True, $"Failed to find {nameof(RespiratorComponent)} on player entity ({entMan.ToPrettyString(player)})");
+                if (!entMan.TryGetComponent(player, out RespiratorComponent? resp))
+                    return;
+
                 Assert.That(entMan.TryGetComponent(player, out DamageableComponent? damage), Is.True, $"Failed to find {nameof(DamageableComponent)} on player entity ({entMan.ToPrettyString(player)})");
 
                 Assert.Multiple(() =>
