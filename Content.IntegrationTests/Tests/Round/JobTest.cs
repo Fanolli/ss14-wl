@@ -67,7 +67,7 @@ public sealed class JobTest
         // WL-Changes-start
         HashSet<ProtoId<JobPrototype>>? disallowedJobs = null;
 
-        await pair.Server.WaitPost(() => disallowedJobs = playTimeTrackerSys.GetDisallowedJobs(pair.Player!));
+        await pair.Server.WaitPost(() => disallowedJobs = playTimeTrackerSys.GetDisallowedJobs(user));
 
         Assert.That(disallowedJobs, Does.Not.Contain(actualJob),
             $"Assigned job {actualJob} is disallowed for this player");
@@ -75,7 +75,7 @@ public sealed class JobTest
         if (disallowedJobs.Contains(job))
             Assert.Warn($"Expected job {job} is disallowed for this player, actual job: {actualJob}");
         else
-            Assert.That(actualJob, Is.EqualTo(job));
+            Assert.That(actualJob, Is.EqualTo(job), $"Expected job '{job}', but got '{actualJob}'. Disallowed jobs: {disallowedJobs}");
         // WL-Changes-end
 
         Assert.That(roleSys.MindIsAntagonist(mind), Is.EqualTo(isAntag));

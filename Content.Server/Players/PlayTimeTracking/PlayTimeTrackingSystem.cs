@@ -1,8 +1,8 @@
-using System.Linq;
 using Content.Server.Administration;
 using Content.Server.Administration.Managers;
 using Content.Server.Afk;
 using Content.Server.Afk.Events;
+using Content.Server.Database;
 using Content.Server.GameTicking;
 using Content.Server.GameTicking.Events;
 using Content.Server.Preferences.Managers;
@@ -14,12 +14,15 @@ using Content.Shared.Players;
 using Content.Shared.Players.PlayTimeTracking;
 using Content.Shared.Preferences;
 using Content.Shared.Roles;
+using NetCord;
 using Robust.Server.Player;
 using Robust.Shared.Configuration;
 using Robust.Shared.Network;
 using Robust.Shared.Player;
 using Robust.Shared.Prototypes;
 using Robust.Shared.Utility;
+using System.Diagnostics.CodeAnalysis;
+using System.Linq;
 
 namespace Content.Server.Players.PlayTimeTracking;
 
@@ -283,9 +286,14 @@ public sealed class PlayTimeTrackingSystem : EntitySystem
             _preferencesManager.GetPreferences(player.UserId).SelectedCharacter);
     }
 
-    public HashSet<ProtoId<JobPrototype>> GetDisallowedJobs(ICommonSession player)
+    // WL-Changes-start
+    [return: NotNullIfNotNull(nameof(player))]
+    public HashSet<ProtoId<JobPrototype>>? GetDisallowedJobs(ICommonSession? player)
     {
-        // WL-Changes-start
+
+        if (player == null)
+            return null;
+
         var disallowed = new HashSet<ProtoId<JobPrototype>>();
 
         if (!_tracking.TryGetTrackerTimes(player, out var playTimes))
@@ -300,8 +308,20 @@ public sealed class PlayTimeTrackingSystem : EntitySystem
         }
 
         return disallowed;
-        // WL-Changes-end
     }
+
+    [return: NotNullIfNotNull(nameof(userId))]
+    public HashSet<ProtoId<JobPrototype>>? GetDisallowedJobs(NetUserId? userId)
+    {
+        if (userId == null)
+            return null;
+
+        if (!_playerManager.TryGetSessionById(userId, out var session))
+            return [];
+
+        return GetDisallowedJobs(session);
+    }
+    // WL-Changes-end
 
     public void RemoveDisallowedJobs(NetUserId userId, List<ProtoId<JobPrototype>> jobs)
     {
