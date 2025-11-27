@@ -11,6 +11,7 @@ using Content.Shared.GameTicking;
 using Content.Shared.Preferences;
 using Content.Shared.Roles;
 using Content.Shared.Roles.Jobs;
+using NUnit.Framework.Interfaces;
 using Robust.Shared.Network;
 using Robust.Shared.Prototypes;
 
@@ -73,7 +74,7 @@ public sealed class JobTest
             $"Assigned job {actualJob} is disallowed for this player");
 
         if (disallowedJobs.Contains(job))
-            Assert.Warn($"Expected job {job} is disallowed for this player, actual job: {actualJob}");
+            TestContext.Out.WriteLine($"Expected job {job} is disallowed for this player, actual job: {actualJob}");
         else
             Assert.That(actualJob, Is.EqualTo(job), $"Expected job '{job}', but got '{actualJob}'. Disallowed jobs: {disallowedJobs}");
         // WL-Changes-end
