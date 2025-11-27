@@ -20,5 +20,25 @@
 
 - files: ["Fyreont-Endless-Space-_SolusLunes-cover_.ogg"]
   license: "CC-BY-SA-3.0"
-  copyright: "Endless Space remix by Fyreont"
-  source: "https://www.youtube.com/watch?v=g3MFVywoTog"
+  copyright: "Endless Space remix by Fyreont. Converted from MP3 to OGG."
+  source: "https://youtu.be/g3MFVywoTog"
+
+- files: ["Toccata-In-Bit-Minor.ogg"]
+  license: "CC-BY-3.0"
+  copyright: "Toccata in Bit Minor by MRX. Converted from MP3 to OGG."
+  source: "https://youtu.be/IFlxtksO2gw"
+
+- files: ["Empty-Market.ogg"]
+  license: "CC-BY-3.0"
+  copyright: "Empty Market by mrjajkes. Converted from MP3 to OGG."
+  source: "https://youtu.be/EYdNW00CDw8"
+
+- files: ["Get-That-Antag.ogg"]
+  license: "CC-BY-3.0"
+  copyright: "Get That Antag by mrjajkes. Converted from MP3 to OGG."
+  source: "https://youtu.be/Ve-VwnbC1OQ"
+
+- files: ["Traitorous-Intent.ogg"]
+  license: "CC-BY-3.0"
+  copyright: "Traitorous-Intent by mrjajkes. Converted from MP3 to OGG."
+  source: "https://youtu.be/3CZNghXIrvo"

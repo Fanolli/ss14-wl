@@ -32,3 +32,31 @@
   name: Endless Space (remix)
   path:
     path: /Audio/_WL/Jukebox/Custom/Fyreont-Endless-Space-_SolusLunes-cover_.ogg
+
+- type: jukebox
+  id: ToccataInBitMinor
+  author: MRX
+  name: Toccata in Bit Minor
+  path:
+    path: /Audio/_WL/Jukebox/Custom/Toccata-In-Bit-Minor.ogg
+
+- type: jukebox
+  id: EmptyMarket
+  author: mrjajkes
+  name: Empty Market
+  path:
+    path: /Audio/_WL/Jukebox/Custom/Empty-Market.ogg
+
+- type: jukebox
+  id: GetThatAntag
+  author: mrjajkes
+  name: Get That Antag
+  path:
+    path: /Audio/_WL/Jukebox/Custom/Get-That-Antag.ogg
+
+- type: jukebox
+  id: TraitorousIntent
+  author: mrjajkes
+  name: Traitorous Intent
+  path:
+    path: /Audio/_WL/Jukebox/Custom/Traitorous-Intent.ogg
