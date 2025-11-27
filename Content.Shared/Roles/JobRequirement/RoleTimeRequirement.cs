@@ -35,7 +35,7 @@ public sealed partial class RoleTimeRequirement : JobRequirement
         IReadOnlyDictionary<string, TimeSpan> playTimes,
         [NotNullWhen(false)] out FormattedMessage? reason)
     {
-        reason = FormattedMessage.FromUnformatted("Internal error"); // no loc
+        reason = null; // no loc
 
         // WL-Changes-start
         if (cfgMan.GetCVar(CCVars.GameRoleTimers) == false)
@@ -51,7 +51,10 @@ public sealed partial class RoleTimeRequirement : JobRequirement
         var departmentColor = Color.Yellow;
 
         if (!entManager.EntitySysManager.TryGetEntitySystem(out SharedJobSystem? jobSystem))
+        {
+            reason = FormattedMessage.FromUnformatted("Internal error"); // WL-Changes
             return false;
+        }
 
         var jobProto = jobSystem.GetJobPrototype(proto);
 
@@ -59,7 +62,10 @@ public sealed partial class RoleTimeRequirement : JobRequirement
             departmentColor = departmentProto.Color;
 
         if (!protoManager.TryIndex<JobPrototype>(jobProto, out var indexedJob))
+        {
+            reason = FormattedMessage.FromUnformatted("Internal error"); // WL-Changes
             return false;
+        }
 
         if (!Inverted)
         {

@@ -70,7 +70,7 @@ public sealed class JobTest
             $"Assigned job {actualJob} is disallowed for this player");
 
         if (disallowedJobs.Contains(job))
-            Assert.Inconclusive($"Expected job {job} is disallowed for this player, actual job: {actualJob}");
+            Assert.Warn($"Expected job {job} is disallowed for this player, actual job: {actualJob}");
         else
             Assert.That(actualJob, Is.EqualTo(job));
         // WL-Changes-end

@@ -1,12 +1,10 @@
 using System.Diagnostics.CodeAnalysis;
-using System.Linq;
 using Content.Shared.CCVar;
 using Content.Shared.Players;
 using Content.Shared.Players.JobWhitelist;
 using Content.Shared.Players.PlayTimeTracking;
 using Content.Shared.Preferences;
 using Content.Shared.Roles;
-using Microsoft.CodeAnalysis;
 using Robust.Client;
 using Robust.Client.Player;
 using Robust.Shared.Configuration;
@@ -201,24 +199,24 @@ public sealed class JobRequirementsManager : ISharedPlaytimeManager
         // WL-Changes-end
     }
 
-    public bool CheckWhitelist(JobPrototype job, [NotNullWhen(false)] out /*WL-Changes-start*/FormattedMessage[]?/*WL-Changes-end*/ reason)
+    public bool CheckWhitelist(JobPrototype job, [NotNullWhen(false)] out /*WL-Changes-start*/FormattedMessage[]?/*WL-Changes-end*/ reasons)
     {
-        reason = null; // WL-Changes
+        reasons = null; // WL-Changes
         if (!_cfg.GetCVar(CCVars.GameRoleWhitelist))
             return true;
 
         if (job.Whitelisted && !_jobWhitelists.Contains(job.ID))
         {
-            reason = [FormattedMessage.FromUnformatted(Loc.GetString("role-not-whitelisted"))]; // WL-Changes
+            reasons = [FormattedMessage.FromUnformatted(Loc.GetString("role-not-whitelisted"))]; // WL-Changes
             return false;
         }
 
         return true;
     }
 
-    public bool CheckWhitelist(AntagPrototype antag, [NotNullWhen(false)] out /*WL-Changes-start*/FormattedMessage[]?/*WL-Changes-end*/ reason)
+    public bool CheckWhitelist(AntagPrototype antag, [NotNullWhen(false)] out /*WL-Changes-start*/FormattedMessage[]?/*WL-Changes-end*/ reasons)
     {
-        reason = default;
+        reasons = default;
 
         // TODO: Implement antag whitelisting.
 

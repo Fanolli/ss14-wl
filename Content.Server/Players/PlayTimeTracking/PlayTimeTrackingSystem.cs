@@ -285,21 +285,22 @@ public sealed class PlayTimeTrackingSystem : EntitySystem
 
     public HashSet<ProtoId<JobPrototype>> GetDisallowedJobs(ICommonSession player)
     {
-        var roles = new HashSet<ProtoId<JobPrototype>>();
-
         // WL-Changes-start
+        var disallowed = new HashSet<ProtoId<JobPrototype>>();
+
         if (!_tracking.TryGetTrackerTimes(player, out var playTimes))
             playTimes = [];
-        // WL-Changes-end
+
+        var prefs = (HumanoidCharacterProfile?)_preferencesManager.GetPreferences(player.UserId).SelectedCharacter;
 
         foreach (var job in _prototypes.EnumeratePrototypes<JobPrototype>())
         {
-            if (JobRequirements.TryRequirementsMet(job, playTimes, out _, EntityManager, _prototypes, /*WL-Changes-start*/_cfg/*WL-Changes-end*/,
-                (HumanoidCharacterProfile?)_preferencesManager.GetPreferences(player.UserId).SelectedCharacter))
-                roles.Add(job.ID);
+            if (!JobRequirements.TryRequirementsMet(job, playTimes, out _, EntityManager, _prototypes, /*WL-Changes-start*/_cfg/*WL-Changes-end*/, prefs))
+                disallowed.Add(job.ID);
         }
 
-        return roles;
+        return disallowed;
+        // WL-Changes-end
     }
 
     public void RemoveDisallowedJobs(NetUserId userId, List<ProtoId<JobPrototype>> jobs)
@@ -308,21 +309,17 @@ public sealed class PlayTimeTrackingSystem : EntitySystem
         if (!_playerManager.TryGetSessionById(userId, out var player))
             return;
 
-        if (!_tracking.TryGetTrackerTimes(player, out var playTimes))
-            playTimes = [];
-        // WL-Changes-end
+        var disallowed = GetDisallowedJobs(player);
 
         for (var i = 0; i < jobs.Count; i++)
         {
-            if (_prototypes.Resolve(jobs[i], out var job)
-                && JobRequirements.TryRequirementsMet(job, playTimes, out _, EntityManager, _prototypes, /*WL-Changes-start*/_cfg/*WL-Changes-end*/, (HumanoidCharacterProfile?)_preferencesManager.GetPreferences(userId).SelectedCharacter))
-            {
+            if (!disallowed.Contains(jobs[i]))
                 continue;
-            }
 
             jobs.RemoveSwap(i);
             i--;
         }
+        // WL-Changes-end
     }
 
     public void PlayerRolesChanged(ICommonSession player)
