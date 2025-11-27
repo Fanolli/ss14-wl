@@ -302,7 +302,9 @@ public sealed class PlayTimeTrackingSystem : EntitySystem
     public void RemoveDisallowedJobs(NetUserId userId, List<ProtoId<JobPrototype>> jobs)
     {
         // WL-Changes-start
-        var player = _playerManager.GetSessionById(userId);
+        if (!_playerManager.TryGetSessionById(userId, out var player))
+            return;
+
         if (!_tracking.TryGetTrackerTimes(player, out var playTimes))
             playTimes ??= [];
         // WL-Changes-end
