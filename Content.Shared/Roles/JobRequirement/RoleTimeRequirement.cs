@@ -84,6 +84,7 @@ public sealed partial class RoleTimeRequirement : JobRequirement
             return false;
         }
 
+        reason = null; // WL-Changes
         return true;
     }
 }

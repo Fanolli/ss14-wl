@@ -105,7 +105,7 @@ public sealed class JobRequirementsManager : ISharedPlaytimeManager
         List<ProtoId<JobPrototype>>? jobs,
         List<ProtoId<AntagPrototype>>? antags,
         HumanoidCharacterProfile? profile,
-        [NotNullWhen(false)] out /*WL-Changes-start*/List<FormattedMessage>?/*WL-Changes-end*/ reasons)
+        [NotNullWhen(false)] out /*WL-Changes-start*/FormattedMessage[]?/*WL-Changes-end*/ reasons)
     {
         reasons = null;
 
@@ -136,7 +136,7 @@ public sealed class JobRequirementsManager : ISharedPlaytimeManager
     public bool IsAllowed(
         JobPrototype job,
         HumanoidCharacterProfile? profile,
-        [NotNullWhen(false)] out /*WL-Changes-start*/List<FormattedMessage>?/*WL-Changes-end*/ reasons)
+        [NotNullWhen(false)] out /*WL-Changes-start*/FormattedMessage[]?/*WL-Changes-end*/ reasons)
     {
         // Check the player's bans
         if (_jobBans.Contains(job.ID))
@@ -163,7 +163,7 @@ public sealed class JobRequirementsManager : ISharedPlaytimeManager
     public bool IsAllowed(
         AntagPrototype antag,
         HumanoidCharacterProfile? profile,
-        [NotNullWhen(false)] out /*WL-Changes-start*/List<FormattedMessage>?/*WL-Changes-end*/ reasons)
+        [NotNullWhen(false)] out /*WL-Changes-start*/FormattedMessage[]?/*WL-Changes-end*/ reasons)
     {
         // Check the player's bans
         if (_antagBans.Contains(antag.ID))
@@ -188,7 +188,7 @@ public sealed class JobRequirementsManager : ISharedPlaytimeManager
     public bool CheckRoleRequirements(
         HashSet<JobRequirement>? requirements,
         HumanoidCharacterProfile? profile,
-        [NotNullWhen(false)] out /*WL-Changes-start*/List<FormattedMessage>?/*WL-Changes-end*/ reasons,
+        [NotNullWhen(false)] out /*WL-Changes-start*/FormattedMessage[]?/*WL-Changes-end*/ reasons,
         /*WL-Changes-start*/JobPrototype? job = null/*WL-Changes-end*/)
     {
         reasons = null;
@@ -201,7 +201,7 @@ public sealed class JobRequirementsManager : ISharedPlaytimeManager
         // WL-Changes-end
     }
 
-    public bool CheckWhitelist(JobPrototype job, [NotNullWhen(false)] out /*WL-Changes-start*/List<FormattedMessage>?/*WL-Changes-end*/ reason)
+    public bool CheckWhitelist(JobPrototype job, [NotNullWhen(false)] out /*WL-Changes-start*/FormattedMessage[]?/*WL-Changes-end*/ reason)
     {
         reason = null; // WL-Changes
         if (!_cfg.GetCVar(CCVars.GameRoleWhitelist))
@@ -216,7 +216,7 @@ public sealed class JobRequirementsManager : ISharedPlaytimeManager
         return true;
     }
 
-    public bool CheckWhitelist(AntagPrototype antag, [NotNullWhen(false)] out /*WL-Changes-start*/List<FormattedMessage>?/*WL-Changes-end*/ reason)
+    public bool CheckWhitelist(AntagPrototype antag, [NotNullWhen(false)] out /*WL-Changes-start*/FormattedMessage[]?/*WL-Changes-end*/ reason)
     {
         reason = default;
 

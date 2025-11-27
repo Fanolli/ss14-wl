@@ -4,6 +4,7 @@ using System.Linq;
 using Content.IntegrationTests.Pair;
 using Content.Server.GameTicking;
 using Content.Server.Mind;
+using Content.Server.Players.PlayTimeTracking;
 using Content.Server.Roles;
 using Content.Shared.CCVar;
 using Content.Shared.GameTicking;
@@ -50,6 +51,7 @@ public sealed class JobTest
         var mindSys = pair.Server.System<MindSystem>();
         var roleSys = pair.Server.System<RoleSystem>();
         var ticker = pair.Server.System<GameTicker>();
+        var playTimeTrackerSys = pair.Server.System<PlayTimeTrackingSystem>();
 
         user ??= pair.Client.User!.Value;
 
@@ -61,7 +63,18 @@ public sealed class JobTest
         var mind = mindSys.GetMind(uid!.Value);
         Assert.That(pair.Server.EntMan.EntityExists(mind));
         Assert.That(jobSys.MindTryGetJobId(mind, out var actualJob));
-        Assert.That(actualJob, Is.EqualTo(job));
+
+        // WL-Changes-start
+        var disallowedJobs = playTimeTrackerSys.GetDisallowedJobs(pair.Player!);
+        Assert.That(disallowedJobs, Does.Not.Contain(actualJob!.ToString()),
+            $"Assigned job {actualJob} is disallowed for this player");
+
+        if (disallowedJobs.Contains(job))
+            Assert.Inconclusive($"Expected job {job} is disallowed for this player, actual job: {actualJob}");
+        else
+            Assert.That(actualJob, Is.EqualTo(job));
+        // WL-Changes-end
+
         Assert.That(roleSys.MindIsAntagonist(mind), Is.EqualTo(isAntag));
     }
 

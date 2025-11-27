@@ -20,7 +20,7 @@ public static class JobRequirements
     public static bool TryRequirementsMet(
         JobPrototype job,
         IReadOnlyDictionary<string, TimeSpan> playTimes,
-        [NotNullWhen(false)] out /*WL-Changes-start*/List<FormattedMessage>?/*WL-Changes-end*/ reason,
+        [NotNullWhen(false)] out /*WL-Changes-start*/FormattedMessage[]?/*WL-Changes-end*/ reasons,
         IEntityManager entManager,
         IPrototypeManager protoManager,
         /*WL-Changes-start*/IConfigurationManager cfgMan,/*WL-Changes-end*/
@@ -28,7 +28,7 @@ public static class JobRequirements
     {
         var sys = entManager.System<SharedRoleSystem>();
         var requirements = sys.GetRoleRequirements(job);
-        return TryRequirementsMet(requirements, playTimes, out reason, entManager, protoManager, cfgMan, profile, /*WL-Changes-start*/job/*WL-Changes-end*/);
+        return TryRequirementsMet(requirements, playTimes, out reasons, entManager, protoManager, cfgMan, profile, /*WL-Changes-start*/job/*WL-Changes-end*/);
     }
 
     /// <summary>
@@ -41,7 +41,7 @@ public static class JobRequirements
     public static bool TryRequirementsMet(
         HashSet<JobRequirement>? requirements,
         IReadOnlyDictionary<string, TimeSpan> playTimes,
-        [NotNullWhen(false)] out /*WL-Changes-start*/List<FormattedMessage>?/*WL-Changes-end*/ reasons,
+        [NotNullWhen(false)] out /*WL-Changes-start*/FormattedMessage[]?/*WL-Changes-end*/ reasons,
         IEntityManager entManager,
         IPrototypeManager protoManager,
         /*WL-Changes-start*/IConfigurationManager cfgMan,/*WL-Changes-end*/
@@ -77,7 +77,7 @@ public static class JobRequirements
 
         if (!successful)
         {
-            reasons = innerReasons;
+            reasons = [.. innerReasons];
             return false;
         }
         // WL-Changes-end
@@ -92,7 +92,7 @@ public static class JobRequirements
         if (reasons == null)
             return null;
 
-        return FormattedMessage.FromMarkupOrThrow(string.Join("\n", reasons.Select(f => f.ToString())));
+        return FormattedMessage.FromMarkupOrThrow(string.Join("\n", reasons.Select(f => f.ToMarkup())));
     }
     // WL-Changes-end
 }

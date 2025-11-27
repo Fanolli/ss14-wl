@@ -47,10 +47,8 @@ public sealed partial class AgeRequirement : JobRequirement
             return true;
 
         var isNeeded = true;
-        if (profile.JobUnblockings.TryGetValue(job.ID, out var value))
-        {
+        if (profile.JobUnblockings.ContainsKey(job.ID))
             isNeeded = false;
-        }
 
         if (isNeeded)
         {

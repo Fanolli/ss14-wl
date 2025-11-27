@@ -270,7 +270,7 @@ namespace Content.Client.LateJoin
                             jobButton.Disabled = true;
 
                             // WL-Changes-start
-                            if (reasons.Count != 0)
+                            if (reasons.Length != 0)
                             {
                                 var tooltip = new Tooltip();
                                 tooltip.SetMessage(JobRequirements.JoinReasons(reasons));

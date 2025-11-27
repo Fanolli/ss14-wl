@@ -294,7 +294,8 @@ public sealed class PlayTimeTrackingSystem : EntitySystem
 
         foreach (var job in _prototypes.EnumeratePrototypes<JobPrototype>())
         {
-            if (JobRequirements.TryRequirementsMet(job, playTimes, out _, EntityManager, _prototypes, /*WL-Changes-start*/_cfg/*WL-Changes-end*/, (HumanoidCharacterProfile?) _preferencesManager.GetPreferences(player.UserId).SelectedCharacter))
+            if (JobRequirements.TryRequirementsMet(job, playTimes, out _, EntityManager, _prototypes, /*WL-Changes-start*/_cfg/*WL-Changes-end*/,
+                (HumanoidCharacterProfile?)_preferencesManager.GetPreferences(player.UserId).SelectedCharacter))
                 roles.Add(job.ID);
         }
 
@@ -308,7 +309,7 @@ public sealed class PlayTimeTrackingSystem : EntitySystem
             return;
 
         if (!_tracking.TryGetTrackerTimes(player, out var playTimes))
-            playTimes ??= [];
+            playTimes = [];
         // WL-Changes-end
 
         for (var i = 0; i < jobs.Count; i++)
