@@ -1,6 +1,7 @@
 #nullable enable
 using System.Collections.Generic;
 using System.Linq;
+using BenchmarkDotNet.Filters;
 using Content.IntegrationTests.Pair;
 using Content.Server.GameTicking;
 using Content.Server.Mind;
@@ -74,7 +75,7 @@ public sealed class JobTest
             $"Assigned job {actualJob} is disallowed for this player");
 
         if (disallowedJobs.Contains(job))
-            TestContext.Out.WriteLine($"Expected job {job} is disallowed for this player, actual job: {actualJob}");
+            TestContext.Out.WriteLine($"{nameof(JobTest)}.{nameof(AssertJob)}: Expected job {job} is disallowed for this player, actual job: {actualJob}");
         else
             Assert.That(actualJob, Is.EqualTo(job), $"Expected job '{job}', but got '{actualJob}'. Disallowed jobs: {disallowedJobs}");
         // WL-Changes-end
