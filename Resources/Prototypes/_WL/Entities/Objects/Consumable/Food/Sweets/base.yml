@@ -107,7 +107,7 @@
     flavors:
     - sweet
     - chewy
-    - fruit
+    - fruity
   - type: Sprite
     sprite: _WL/Entities/Objects/Consumable/Food/sweets/gummy.rsi
     scale: 0.8, 0.8
