@@ -16,9 +16,10 @@
     - /Audio/Lobby/lasers_rip_apart_the_bulkhead.ogg
     - /Audio/Lobby/every_light_is_blinking_at_once.ogg
     - /Audio/Corvax/Lobby/title2.ogg # Corvax-LobbyMusic
-    - /Audio/Lobby/atomicamnesiammx.ogg
-    - /Audio/Lobby/the_station.ogg # WL-Changes
-    - /Audio/Lobby/spacebard.ogg # WL-Changes
+    - /Audio/_WL/Lobby/atomicamnesiammx.ogg # WL-Changes
+    - /Audio/_WL/Lobby/the_station.ogg # WL-Changes
+    - /Audio/_WL/Lobby/spacebard.ogg # WL-Changes
+    - /Audio/_WL/Lobby/quirky_goblins.ogg # WL-Changes
     - /Audio/Corvax/Lobby/service.ogg # Corvax-LobbyMusic
     - /Audio/Corvax/Lobby/nodecision.ogg # Corvax-LobbyMusic
     - /Audio/_WL/Jukebox/Custom/Tintin_on_the_Moon_(Noisemakers_Remix).ogg # WL-Changes
