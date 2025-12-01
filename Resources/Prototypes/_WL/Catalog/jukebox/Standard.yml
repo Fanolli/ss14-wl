@@ -52,7 +52,7 @@
   author: Philip Dyer
   name: Atomic Amnesia MMX
   path:
-    path: /Audio/Lobby/atomicamnesiammx.ogg
+    path: /Audio/_WL/Lobby/atomicamnesiammx.ogg
 
 - type: jukebox
   id: CometHaley
@@ -115,14 +115,14 @@
   author: Choojoy
   name: Russian Spacebard Song
   path:
-    path: /Audio/Lobby/spacebard.ogg
+    path: /Audio/_WL/Lobby/spacebard.ogg
 
 - type: jukebox
   id: TheStation
   author: A-Guy
   name: The Station
   path:
-    path: /Audio/Lobby/the_station.ogg
+    path: /Audio/_WL/Lobby/the_station.ogg
 
 - type: jukebox
   id: TheWizard
