@@ -27,9 +27,10 @@ public sealed partial class StationaryComputerSystem : SharedStationaryComputerS
 
                     if (options.TryGetValue("color", out var values) && values.Count >= 1)
                     {
-                        if (Color.TryFromName(values[0], out var color1))
+                        Color color;
+                        if (Color.TryFromName(values[0], out var color_))
                         {
-                            ent.Comp.ConsoleColor = color1;
+                            color = color_;
                         }
                         else
                         {
@@ -38,11 +39,13 @@ public sealed partial class StationaryComputerSystem : SharedStationaryComputerS
                             if (color2 == null)
                                 return Robust.Shared.Localization.Loc.GetString("stationary-computer-response-unknown-color");
 
-                            ent.Comp.ConsoleColor = color2.Value;
+                            color = color2.Value;
                         }
+
+                        ent.Comp.ConsoleColor = color.WithAlpha(255);
                     }
 
-                    return EmptyResponse;
+                    return null;
                 },
 
                 ["clear"] = (pos, options, ent, entMan) =>
@@ -63,7 +66,7 @@ public sealed partial class StationaryComputerSystem : SharedStationaryComputerS
                     var count = list.Count;
 
                     if (count == 0)
-                        return EmptyResponse;
+                        return null;
 
                     if (options.TryGetValue("blocks", out var blockArgs) &&
                         blockArgs.Count > 0 &&
@@ -73,7 +76,7 @@ public sealed partial class StationaryComputerSystem : SharedStationaryComputerS
                         if (toDelete > 0)
                         {
                             list.RemoveRange(count - toDelete, toDelete);
-                            return EmptyResponse;
+                            return null;
                         }
                     }
 
@@ -85,7 +88,7 @@ public sealed partial class StationaryComputerSystem : SharedStationaryComputerS
                         if (toDelete > 0)
                         {
                             list.RemoveRange(count - toDelete, toDelete);
-                            return EmptyResponse;
+                            return null;
                         }
                     }
 
@@ -95,11 +98,11 @@ public sealed partial class StationaryComputerSystem : SharedStationaryComputerS
                         if (toDelete > 0)
                         {
                             list.RemoveRange(count - toDelete, toDelete);
-                            return EmptyResponse;
+                            return null;
                         }
                     }
 
-                    return EmptyResponse;
+                    return null;
                 },
 
                 ["lock"] = (pos, options, ent, entMan) =>
@@ -113,7 +116,7 @@ public sealed partial class StationaryComputerSystem : SharedStationaryComputerS
                     ent.Comp.Locked = true;
                     ent.Comp.Password = pos[0];
 
-                    return EmptyResponse;
+                    return null;
                 },
 
                 ["unlock"] = (pos, options, ent, entMan) =>
@@ -128,7 +131,7 @@ public sealed partial class StationaryComputerSystem : SharedStationaryComputerS
                     ent.Comp.Locked = false;
                     ent.Comp.Password = null;
 
-                    return EmptyResponse;
+                    return null;
                 }
             };
 
@@ -166,7 +169,7 @@ public sealed partial class StationaryComputerSystem : SharedStationaryComputerS
         )
     {
         if (!Commands.TryGetValue(name, out var action))
-            return Robust.Shared.Localization.Loc.GetString("stationary-computer-response-unknown-command");
+            return null;
 
         return action(positional, options, ent, entMan);
     }
@@ -199,7 +202,7 @@ public sealed partial class StationaryComputerSystem : SharedStationaryComputerS
 
     public static bool TryVerifyPassword(Entity<StationaryComputerComponent> computer, Dictionary<string, List<string>> commandOptions, [NotNullWhen(false)] out string? response)
     {
-        const string passwordOption = "pw";
+        const string passwordOption = "pw"; //
 
         if (!computer.Comp.Locked)
         {
